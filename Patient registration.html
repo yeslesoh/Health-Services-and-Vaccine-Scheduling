@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Registration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+        }
+        .symptoms-section {
+            display: none;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Patient Services</h2>
+
+    <form id="servicesForm" action="#" method="post">
+        <label for="service">Select Service:</label>
+        <select id="service" name="service" onchange="toggleSymptomsSection()" required>
+            <option value="" disabled selected>Select a service</option>
+            <option value="vaccine">Vaccine Scheduling</option>
+            <option value="health">Health Services</option>
+            <!-- Add more options as needed -->
+        </select>
+
+        <div class="symptoms-section" id="symptomsSection">
+            <label for="symptoms">Do you currently have any symptoms?</label>
+            <select id="symptoms" name="symptoms">
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+        </div>
+
+        <button type="button" onclick="checkSymptoms()">Next</button>
+    </form>
+
+    <h2>Patient Registration</h2>
+
+    <form id="patientForm" action="#" method="post" style="display: none;">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="dob">Date of Birth:</label>
+        <input type="date" id="dob" name="dob" required>
+
+        <label for="address">Address:</label>
+        <textarea id="address" name="address" rows="4" required></textarea>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        function toggleSymptomsSection() {
+            var serviceSelect = document.getElementById('service');
+            var symptomsSection = document.getElementById('symptomsSection');
+            
+            if (serviceSelect.value === 'vaccine') {
+                symptomsSection.style.display = 'block';
+            } else {
+                symptomsSection.style.display = 'none';
+            }
+        }
+
+        function checkSymptoms() {
+            var symptomsSelect = document.getElementById('symptoms');
+            var patientForm = document.getElementById('patientForm');
+            var servicesForm = document.getElementById('servicesForm');
+
+            if (symptomsSelect.value === 'no') {
+                patientForm.style.display = 'block';
+                servicesForm.style.display = 'none';
+            } else {
+                // Handle other scenarios if needed
+                alert('Please consult with a healthcare professional.');
+            }
+        }
+    </script>
+
+</body>
+</html>
